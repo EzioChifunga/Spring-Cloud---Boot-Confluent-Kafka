@@ -1,0 +1,31 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: notificacao-service
+
+  kafka:
+    # --- Configuracao para Kafka LOCAL (docker-compose) ---
+    bootstrap-servers: localhost:9092
+
+    consumer:
+      group-id: grupo-notificacao
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "com.ecommerce.notificacao.event"
+        spring.json.value.default.type: com.ecommerce.notificacao.event.PedidoEvent
+        spring.json.use.type.headers: false
+
+    # --- Configuracao para CONFLUENT CLOUD (descomente e preencha para usar) ---
+    # bootstrap-servers: <SEU_CLUSTER>.confluent.cloud:9092
+    # properties:
+    #   security.protocol: SASL_SSL
+    #   sasl.mechanism: PLAIN
+    #   sasl.jaas.config: 'org.apache.kafka.common.security.plain.PlainLoginModule required username="<SUA_API_KEY>" password="<SUA_API_SECRET>";'
+
+logging:
+  level:
+    com.ecommerce: INFO

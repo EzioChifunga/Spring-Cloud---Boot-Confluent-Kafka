@@ -1,0 +1,21 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: pedido-service
+
+  kafka:
+    # --- Configuracao para Kafka LOCAL (docker-compose) ---
+    bootstrap-servers: localhost:9092
+
+    # --- Configuracao para CONFLUENT CLOUD (descomente e preencha para usar) ---
+    # bootstrap-servers: <SEU_CLUSTER>.confluent.cloud:9092
+    # properties:
+    #   security.protocol: SASL_SSL
+    #   sasl.mechanism: PLAIN
+    #   sasl.jaas.config: 'org.apache.kafka.common.security.plain.PlainLoginModule required username="<SUA_API_KEY>" password="<SUA_API_SECRET>";'
+
+logging:
+  level:
+    com.ecommerce: INFO
